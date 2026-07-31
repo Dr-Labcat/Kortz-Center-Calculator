@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kortz Center Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+    <h1>Kortz Center Calculator</h1>
+    <div class="columns">
+
+        <div class="panel" id="leftPanel">
+            <section class="block">
+                <div class="row">
+                    <div class="field">
+                        <span class="field-label">Players</span>
+                        <div class="button-group" id="playersGroup">
+                            <button type="button" data-value="1" class="active">1</button>
+                            <button type="button" data-value="2">2</button>
+                            <button type="button" data-value="3">3</button>
+                            <button type="button" data-value="4">4</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="field-label">Mode</span>
+                        <div class="button-group" id="modeGroup">
+                            <button type="button" data-value="normal" class="active">Normal</button>
+                            <button type="button" data-value="hard">Hard</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="field-label">Alarm triggered</span>
+                        <div class="button-group" id="alarmGroup">
+                            <button type="button" data-value="noAlarm" class="active">No</button>
+                            <button type="button" data-value="alarm">Yes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bonus-row">
+                    <div class="field">
+                        <span class="field-label">Weekly bonus</span>
+                        <div class="button-group" id="weeklyBonusGroup">
+                            <button type="button" data-value="off" class="active">Off</button>
+                            <button type="button" data-value="on">On</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="field-label">Elite challenge</span>
+                        <div class="button-group" id="eliteGroup">
+                            <button type="button" data-value="off" class="active">Off</button>
+                            <button type="button" data-value="on">On</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="field-label">Buyer request</span>
+                        <div class="button-group" id="buyerGroup">
+                            <button type="button" data-value="off" class="active">Off</button>
+                            <button type="button" data-value="on">On</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row bonus-row">
+                    <div class="field">
+                        <span class="field-label">Plasma cutter</span>
+                        <div class="button-group" id="cutterGroup">
+                            <button type="button" data-value="yes" class="active">Yes</button>
+                            <button type="button" data-value="no">No</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="field-label">Painting</span>
+                        <div class="button-group" id="keepPaintingGroup">
+                            <button type="button" data-value="off" class="active">Sell</button>
+                            <button type="button" data-value="on">Keep</button>
+                        </div>
+                    </div>                
+                </div>
+
+                <div class="row target-row">
+                    <div class="field field-wide">
+                        <span class="field-label">Primary target</span>
+                        <select id="primarySelect"></select>
+                    </div>
+                    <div class="field field-value">
+                        <span class="field-label">Primary payout</span>
+                        <strong id="primaryValue" class="figure">$0</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="block loot-bags-block">
+                <div class="block-header">
+                    <h2>Loot bags</h2>
+                    <div class="button-group small" id="lootModeGroup">
+                        <button type="button" data-value="manual" class="active">Manual</button>
+                        <button type="button" data-value="automatic">Automatic</button>
+                    </div>
+                </div>
+                <div class="row auto-row hidden" id="autoRow">
+                    <label class="checkbox"><input type="checkbox" id="prioritizeBuyer"><span>Prioritize buyer request item</span></label>
+                </div>
+                <div id="bagsContainer"></div>
+            </section>
+
+            <section class="block payout-block">
+                <div class="payout">
+                    <span class="field-label">Host payout</span>
+                    <strong id="hostValue" class="figure">$0</strong>
+                </div>
+                <div class="payout">
+                    <span class="field-label">Crew payout</span>
+                    <strong id="crewValue" class="figure">$0</strong>
+                </div>
+            </section>
+        </div>
+
+        <div class="panel" id="rightPanel">
+            <section class="block map-block">
+                <div class="floor-buttons" id="floorButtons">
+                    <button type="button" data-floor="lower" class="active">Lower floor</button>
+                    <button type="button" data-floor="main">Main floor</button>
+                    <button type="button" data-floor="top">Top floor</button>
+                </div>
+
+                <div class="block-header setup-header">
+                    <p class="hint" id="setupHint">Turn on "Setup map", then click a marker to record what's there.</p>
+                    <label class="checkbox toggle"><input type="checkbox" id="setupMode"><span>Setup map</span></label>
+                </div>
+
+                <div class="map-frame">
+                    <img id="mapImage" src="Data/Map/Bell_Building_Lower_Floor_Secondary_Targets_Standardized size.png" alt="Floor map">
+                    <div class="marker-layer" id="markerLayer"></div>
+                </div>
+
+                <div class="marker-editor hidden" id="markerEditor">
+                    <div class="marker-editor-head">
+                        <span>Editing <strong id="editorLabel">—</strong></span>
+                        <button type="button" id="editorClose" class="text-button">Close</button>
+                    </div>
+                    <div class="marker-editor-body">
+                        <select id="editorSelect"></select>
+                        <input type="number" id="editorValueInput" placeholder="Value">
+                        <button type="button" id="editorClear" class="text-button">Clear</button>
+                    </div>
+                    <label class="checkbox buyer-flag-row">
+                        <input type="checkbox" id="editorBuyerFlag">
+                        <span>This is the buyer's request item</span>
+                    </label>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</main>
+<script type="module" src="main.js"></script>
+</body>
+</html>

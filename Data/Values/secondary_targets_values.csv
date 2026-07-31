@@ -1,0 +1,146 @@
+<<<<<<< HEAD
+Category,Item,Min_Value,Max_Value,Bag_Fill_Percentage
+Paintings,Canis Hominem Edit,102500,122500,50
+Paintings,Cooked,102500,122500,50
+Paintings,Do You See Me,102500,122500,50
+Paintings,Don't Forgo These Blueprints,140000,162500,50
+Paintings,Explain Yourself,102500,122500,50
+Paintings,Het Gouden Hondje,70000,92500,50
+Paintings,La Duchesse,102500,122500,50
+Paintings,Orange Crush,102500,122500,50
+Paintings,Sod Off,102500,122500,50
+Paintings,Swingset Study No. LXIX,70000,92500,50
+Paintings,The Chief,102500,122500,50
+Paintings,The Great Circle Back,140000,162500,50
+Paintings,The Hunter Becomes the Hunted,70000,92500,50
+Paintings,With Friends Like These,70000,92500,50
+Necklaces,Coquard Carcanet (Emerald),77500,100000,30
+Necklaces,Coquard Carcanet (Imperial Topaz),77500,100000,30
+Necklaces,Coquard Carcanet (Red Spinel),77500,100000,30
+Necklaces,Coquard Carcanet (Sapphire),77500,100000,30
+Necklaces,Coquard Carcanet (Tanzanite),77500,100000,30
+Necklaces,Coquard Carcanet (Yellow Diamond),77500,100000,30
+Jewelry,Aquamarine Gemstone,100000,127500,30
+Jewelry,Emerald Gemstone,100000,127500,30
+Jewelry,Gray Spinel Gemstone,100000,127500,30
+Jewelry,Purple Sapphire Gemstone,100000,127500,30
+Jewelry,Ruby Gemstone,100000,127500,30
+Jewelry,Tanzanite Gemstone,100000,127500,30
+Jewelry,Yellow Topaz Gemstone,100000,127500,30
+Skulls,Memento Non Mori (Amethyst),77500,100000,30
+Skulls,Memento Non Mori (Diamond),77500,100000,30
+Skulls,Memento Non Mori (Emerald),77500,100000,30
+Skulls,Memento Non Mori (Gold),77500,100000,30
+Skulls,Memento Non Mori (Ruby),77500,100000,30
+Skulls,Memento Non Mori (Sapphire),77500,100000,30
+Statues,Cremello Dutch Warmblood,100000,127500,30
+Statues,Gold Turkoman,100000,127500,30
+Statues,Marble Sabino Criollo,100000,127500,30
+Statues,Perlino Andalusian,100000,127500,30
+Statues,Silver Dapple Pinto,100000,127500,30
+Statues,Venus d'Algernon (Bronze),100000,127500,30
+Statues,Venus d'Algernon (Gold),100000,127500,30
+Statues,Venus d'Algernon (Ivory),100000,127500,30
+Statues,Venus d'Algernon (Marble),100000,127500,30
+Statues,Venus d'Algernon (Silver),100000,127500,30
+Crate,Crate in the truck,105000,140000,30
+Ornamental Eggs,Œuf de Coquard de vouivre,50000,64000,20
+Ornamental Eggs,Œuf de Coquard des abimes,50000,64000,20
+Ornamental Eggs,Œuf de Coquard décoratif,50000,64000,20
+Ornamental Eggs,Œuf de Coquard enchanté,50000,64000,20
+Ornamental Eggs,Œuf de Coquard forestier,50000,64000,20
+Ornamental Eggs,Œuf de Coquard royal,50000,64000,20
+Ornamental Eggs,Œuf de Coquard verdoyant,50000,64000,20
+Idols,Fertility Statue (Bronze),70000,96000,20
+Idols,Fertility Statue (Gold),70000,96000,20
+Idols,Fertility Statue (Ivory),70000,96000,20
+Idols,Fertility Statue (Mahogany),70000,96000,20
+Idols,Fertility Statue (Silver),70000,96000,20
+Meteorite,Meteorite Fragment,70000,92500,20
+Rings,Antique Rings,42000,53000,10
+Rings,Art Deco Rings,42000,53000,10
+Rings,Coquard Rings,42000,53000,10
+Bracelets,Antique Bands,28000,35000,10
+Bracelets,Art Deco Circlets,42000,53000,10
+Bracelets,Byzantine Hoops,28000,35000,10
+Bracelets,Coquard Bracelets,28000,35000,10
+Bracelets,Pharaonic Bangles,28000,35000,10
+Deposit Boxes,"Deposit Box (10,000 - 5% chance)",10000,10000,30
+Deposit Boxes,"Deposit Box (12,500 - 5% chance)",12500,12500,30
+Deposit Boxes,"Deposit Box (8,000 - 35% chance)",8000,8000,30
+Deposit Boxes,"Deposit Boxes (5,000 - 10% chance)",5000,5000,30
+Deposit Boxes,"Deposit Boxes (6,000 - 10% chance)",6000,6000,30
+=======
+Category,Item,Min_Value,Max_Value,Bag_Fill_Percentage
+Paintings,Canis Hominem Edit,102500,122500,50
+Paintings,Cooked,102500,122500,50
+Paintings,Do You See Me,102500,122500,50
+Paintings,Don't Forgo These Blueprints,140000,162500,50
+Paintings,Explain Yourself,102500,122500,50
+Paintings,Het Gouden Hondje,70000,92500,50
+Paintings,La Duchesse,102500,122500,50
+Paintings,Orange Crush,102500,122500,50
+Paintings,Sod Off,102500,122500,50
+Paintings,Swingset Study No. LXIX,70000,92500,50
+Paintings,The Chief,102500,122500,50
+Paintings,The Great Circle Back,140000,162500,50
+Paintings,The Hunter Becomes the Hunted,70000,92500,50
+Paintings,With Friends Like These,70000,92500,50
+Necklaces,Coquard Carcanet (Emerald),77500,100000,30
+Necklaces,Coquard Carcanet (Imperial Topaz),77500,100000,30
+Necklaces,Coquard Carcanet (Red Spinel),77500,100000,30
+Necklaces,Coquard Carcanet (Sapphire),77500,100000,30
+Necklaces,Coquard Carcanet (Tanzanite),77500,100000,30
+Necklaces,Coquard Carcanet (Yellow Diamond),77500,100000,30
+Jewelry,Aquamarine Gemstone,100000,127500,30
+Jewelry,Emerald Gemstone,100000,127500,30
+Jewelry,Gray Spinel Gemstone,100000,127500,30
+Jewelry,Purple Sapphire Gemstone,100000,127500,30
+Jewelry,Ruby Gemstone,100000,127500,30
+Jewelry,Tanzanite Gemstone,100000,127500,30
+Jewelry,Yellow Topaz Gemstone,100000,127500,30
+Skulls,Memento Non Mori (Amethyst),77500,100000,30
+Skulls,Memento Non Mori (Diamond),77500,100000,30
+Skulls,Memento Non Mori (Emerald),77500,100000,30
+Skulls,Memento Non Mori (Gold),77500,100000,30
+Skulls,Memento Non Mori (Ruby),77500,100000,30
+Skulls,Memento Non Mori (Sapphire),77500,100000,30
+Statues,Cremello Dutch Warmblood,100000,127500,30
+Statues,Gold Turkoman,100000,127500,30
+Statues,Marble Sabino Criollo,100000,127500,30
+Statues,Perlino Andalusian,100000,127500,30
+Statues,Silver Dapple Pinto,100000,127500,30
+Statues,Venus d'Algernon (Bronze),100000,127500,30
+Statues,Venus d'Algernon (Gold),100000,127500,30
+Statues,Venus d'Algernon (Ivory),100000,127500,30
+Statues,Venus d'Algernon (Marble),100000,127500,30
+Statues,Venus d'Algernon (Silver),100000,127500,30
+Crate,Crate in the truck,105000,140000,30
+Ornamental Eggs,Œuf de Coquard de vouivre,50000,64000,20
+Ornamental Eggs,Œuf de Coquard des abimes,50000,64000,20
+Ornamental Eggs,Œuf de Coquard décoratif,50000,64000,20
+Ornamental Eggs,Œuf de Coquard enchanté,50000,64000,20
+Ornamental Eggs,Œuf de Coquard forestier,50000,64000,20
+Ornamental Eggs,Œuf de Coquard royal,50000,64000,20
+Ornamental Eggs,Œuf de Coquard verdoyant,50000,64000,20
+Idols,Fertility Statue (Bronze),70000,96000,20
+Idols,Fertility Statue (Gold),70000,96000,20
+Idols,Fertility Statue (Ivory),70000,96000,20
+Idols,Fertility Statue (Mahogany),70000,96000,20
+Idols,Fertility Statue (Silver),70000,96000,20
+Meteorite,Meteorite Fragment,70000,92500,20
+Rings,Antique Rings,42000,53000,10
+Rings,Art Deco Rings,42000,53000,10
+Rings,Coquard Rings,42000,53000,10
+Bracelets,Antique Bands,28000,35000,10
+Bracelets,Art Deco Circlets,42000,53000,10
+Bracelets,Byzantine Hoops,28000,35000,10
+Bracelets,Coquard Bracelets,28000,35000,10
+Bracelets,Pharaonic Bangles,28000,35000,10
+Deposit Boxes,"Deposit Box (10,000 - 5% chance)",10000,10000,30
+Deposit Boxes,"Deposit Box (12,500 - 5% chance)",12500,12500,30
+Deposit Boxes,"Deposit Box (8,000 - 35% chance)",8000,8000,30
+Deposit Boxes,"Deposit Boxes (5,000 - 10% chance)",5000,5000,30
+Deposit Boxes,"Deposit Boxes (6,000 - 10% chance)",6000,6000,30
+>>>>>>> 684f3c04fc21b592e2095ba010ae0b73a6c37813
+Deposit Boxes,"Deposit Boxes (7,500 - 35% chance)",7500,7500,30
