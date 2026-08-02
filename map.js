@@ -1,17 +1,25 @@
 import {
-    state, FLOORS, FLOOR_IMAGE_FILES, FLOOR_IMAGES,
+    state, FLOORS, FLOOR_IMAGE_FILES, FLOOR_IMAGES, ZONES,
     MARKER_SIZE, BUYER_REQUEST_MAX, lootByKey, secondaryItems, floorName, saveSetup
 } from './state.js';
 import { CATEGORY_ORDER } from './loot-values.js';
 
-// Cutter cases (red) are excluded entirely when the crew didn't bring a
-// plasma cutter — they can't be opened, so they shouldn't count anywhere:
-// not in the map's assigned-item pool, not in bags, not in payout.
+// Cutter cases (red) are excluded when the crew didn't bring a plasma
+// cutter, and Krisp Collection loot (that back room on the Top floor) is
+// excluded when playing solo — that room needs 2+ people to get into.
+// Either way the loot shouldn't count anywhere: not in the map's
+// assigned-item pool, not in bags, not in payout.
+function isAccessible(marker) {
+    if (marker.color === 'red' && !state.hasPlasmaCutter) return false;
+    if (marker.zone === 'krisp' && state.players < 2) return false;
+    return true;
+}
+
 export function discoveredMarkers() {
     const result = [];
     Object.entries(FLOORS).forEach(([floor, markers]) => {
         markers.forEach(marker => {
-            if (marker.color === 'red' && !state.hasPlasmaCutter) return;
+            if (!isAccessible(marker)) return;
             const assignment = state.assignments.get(marker.id);
             if (!assignment) return;
             const item = lootByKey.get(assignment.itemKey);
@@ -38,14 +46,33 @@ export function renderMarkers(onMarkerAction) {
     const size = FLOOR_IMAGES[state.currentFloor];
     layer.innerHTML = '';
 
+    // Zone boxes first (underneath), so markers drawn after them stay on
+    // top and clickable. Zones themselves never take clicks (see the
+    // .map-zone { pointer-events: none } rule).
+    (ZONES[state.currentFloor] || []).forEach(zone => {
+        const box = document.createElement('div');
+        box.className = 'map-zone';
+        box.style.left = `${(zone.x / size.width) * 100}%`;
+        box.style.top = `${(zone.y / size.height) * 100}%`;
+        box.style.width = `${(zone.width / size.width) * 100}%`;
+        box.style.height = `${(zone.height / size.height) * 100}%`;
+
+        const labelEl = document.createElement('span');
+        labelEl.className = 'map-zone-label';
+        labelEl.textContent = zone.label;
+        box.appendChild(labelEl);
+
+        layer.appendChild(box);
+    });
+
     FLOORS[state.currentFloor].forEach(marker => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = `marker ${marker.color}`;
         btn.dataset.id = marker.id;
 
-        const disabledByCutter = marker.color === 'red' && !state.hasPlasmaCutter;
-        if (disabledByCutter) btn.classList.add('disabled');
+        const disabled = !isAccessible(marker);
+        if (disabled) btn.classList.add('disabled');
 
         const half = MARKER_SIZE / 2;
         btn.style.left = `${((marker.x - half) / size.width) * 100}%`;
@@ -55,7 +82,9 @@ export function renderMarkers(onMarkerAction) {
 
         const assignment = state.assignments.get(marker.id);
         const assignedItem = assignment ? lootByKey.get(assignment.itemKey) : null;
-        if (disabledByCutter) {
+        if (disabled && marker.zone === 'krisp') {
+            btn.title = `${marker.label} — needs 2+ players to access`;
+        } else if (disabled) {
             btn.title = `${marker.label} — no plasma cutter, can't open this`;
         } else if (assignedItem) {
             btn.classList.add('assigned');
