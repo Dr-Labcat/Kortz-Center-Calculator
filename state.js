@@ -28,7 +28,7 @@ export const ZONES = {
     lower: [],
     main: [],
     top: [
-        { id: 'krisp-zone', label: 'Krisp Collection', x: 580, y: 1440, width: 730, height: 350 }
+        { id: 'krisp-zone', label: 'Krisp Collection', x: 500, y: 1500, width: 830, height: 250 }
     ]
 };
 
