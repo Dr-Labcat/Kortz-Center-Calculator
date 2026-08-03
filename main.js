@@ -70,8 +70,29 @@ function calculate() {
     document.getElementById('crewValue').textContent = money(crewPay);
 }
 
+// markerId -> player number (1-based), for the small badge shown on the
+// map itself. Works the same way in both loot modes: manual reads directly
+// from state.bags, automatic reads the computed allocation.
+function computePlayerAssignmentMap() {
+    const map = new Map();
+    if (state.lootMode === 'manual') {
+        state.bags.slice(0, state.players).forEach((slots, playerIdx) => {
+            slots.forEach(markerId => {
+                if (markerId) map.set(markerId, playerIdx + 1);
+            });
+        });
+    } else {
+        const discovered = discoveredMarkers();
+        const { playerBins } = computeAutomaticAllocation(discovered);
+        playerBins.forEach((bin, playerIdx) => {
+            bin.items.forEach(entry => map.set(entry.markerId, playerIdx + 1));
+        });
+    }
+    return map;
+}
+
 function refreshAll() {
-    renderMarkers(refreshAll);
+    renderMarkers(refreshAll, computePlayerAssignmentMap());
     renderBags(refreshAll);
     calculate();
 }
@@ -132,7 +153,7 @@ function bindEvents() {
 function init() {
     loadSetup();
     buildPrimaryOptions();
-    renderMarkers(refreshAll);
+    renderMarkers(refreshAll, computePlayerAssignmentMap());
     renderBags(refreshAll);
     bindEvents();
     calculate();

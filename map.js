@@ -52,7 +52,7 @@ export function switchFloor(floor, onSwitchComplete) {
     state.currentFloor = floor;
     document.getElementById('mapImage').src = `Data/Map/${FLOOR_IMAGE_FILES[floor]}`;
     closeEditor();
-    renderMarkers(onSwitchComplete);
+    if (onSwitchComplete) onSwitchComplete();
 }
 
 function secondaryDisplayValue(assignment) {
@@ -60,7 +60,9 @@ function secondaryDisplayValue(assignment) {
     return state.mode === 'hard' ? Math.round(assignment.value * 1.1) : assignment.value;
 }
 
-export function renderMarkers(onMarkerAction) {
+// playerAssignmentMap: markerId -> player number (1-based), so the map can
+// show a small badge on whichever marker's item ended up in someone's bag.
+export function renderMarkers(onMarkerAction, playerAssignmentMap = new Map()) {
     const layer = document.getElementById('markerLayer');
     const size = FLOOR_IMAGES[state.currentFloor];
     layer.innerHTML = '';
@@ -116,6 +118,15 @@ export function renderMarkers(onMarkerAction) {
             btn.title += ' — buyer request';
         }
 
+        const playerNum = playerAssignmentMap.get(marker.id);
+        if (playerNum) {
+            const badge = document.createElement('span');
+            badge.textContent = playerNum;
+            badge.style.cssText = 'position:absolute; top:-7px; right:-7px; background:#1c2126; color:#fff; border-radius:50%; width:17px; height:17px; font-size:10px; font-weight:700; line-height:17px; text-align:center; pointer-events:none; box-shadow:0 0 0 2px #fff;';
+            btn.appendChild(badge);
+            btn.title += ` — in Player ${playerNum}'s bag`;
+        }
+
         btn.addEventListener('click', () => {
             if (!state.setupMode) return;
             state.selectedMarker = { floor: state.currentFloor, id: marker.id, label: marker.label, color: marker.color };
@@ -158,15 +169,31 @@ function populateEditorSelect(markerId, color) {
     const select = document.getElementById('editorSelect');
     select.innerHTML = '';
     select.disabled = false;
+    select.style.display = '';
+
+    // Remove any leftover fixed-name label from a previous marker before
+    // deciding whether this one needs a new one.
+    const oldLabel = document.getElementById('editorFixedName');
+    if (oldLabel) oldLabel.remove();
 
     const fixed = fixedPaintingFor(markerId);
     if (fixed) {
+        // Keep the select in the DOM (commitAssignment reads its value) but
+        // hide it entirely and show a plain label instead — no dropdown
+        // arrow, nothing that looks pickable, since it isn't.
         const opt = document.createElement('option');
         opt.value = fixed.key;
         opt.textContent = fixed.label;
         select.appendChild(opt);
         select.value = fixed.key;
         select.disabled = true;
+        select.style.display = 'none';
+
+        const nameLabel = document.createElement('span');
+        nameLabel.id = 'editorFixedName';
+        nameLabel.textContent = fixed.label;
+        nameLabel.style.cssText = 'flex:2; border:1px solid var(--line-strong,#9aa0a8); border-radius:7px; padding:9px 10px; background:var(--panel,#f4f5f7); color:var(--text,#1c2126); font:inherit;';
+        select.insertAdjacentElement('beforebegin', nameLabel);
         return;
     }
 
