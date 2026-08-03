@@ -3,6 +3,25 @@ import {
     MARKER_SIZE, BUYER_REQUEST_MAX, lootByKey, secondaryItems, floorName, saveSetup
 } from './state.js';
 import { CATEGORY_ORDER } from './loot-values.js';
+import { paintingLocations } from './painting-locations.js';
+
+function normalizeName(s) {
+    return s.trim().toLowerCase();
+}
+
+const paintingByNormalizedName = new Map(
+    secondaryItems
+        .filter(item => item.Category === 'Paintings')
+        .map(item => [normalizeName(item.Target), item])
+);
+
+// A marker with a confirmed fixed painting returns that loot item; every
+// other marker returns null and keeps the normal picker.
+function fixedPaintingFor(markerId) {
+    const name = paintingLocations[markerId];
+    if (!name) return null;
+    return paintingByNormalizedName.get(normalizeName(name)) || null;
+}
 
 // Cutter cases (red) are excluded when the crew didn't bring a plasma
 // cutter, and Krisp Collection loot (that back room on the Top floor) is
@@ -113,8 +132,21 @@ export function openEditor(onChangeCallback) {
     populateEditorSelect(id, color);
 
     const existing = state.assignments.get(id);
-    document.getElementById('editorValueInput').value = existing ? existing.value : '';
+    const fixed = fixedPaintingFor(id);
+    if (existing) {
+        document.getElementById('editorValueInput').value = existing.value;
+    } else if (fixed) {
+        document.getElementById('editorValueInput').value = fixed.defaultValue;
+    } else {
+        document.getElementById('editorValueInput').value = '';
+    }
     document.getElementById('editorBuyerFlag').checked = state.buyerMarkerIds.includes(id);
+
+    // Fixed-painting markers have no user-driven select change to trigger
+    // the first save, so lock in the default value right away.
+    if (!existing && fixed) {
+        commitAssignment(onChangeCallback);
+    }
 }
 
 export function closeEditor() {
@@ -124,6 +156,20 @@ export function closeEditor() {
 
 function populateEditorSelect(markerId, color) {
     const select = document.getElementById('editorSelect');
+    select.innerHTML = '';
+    select.disabled = false;
+
+    const fixed = fixedPaintingFor(markerId);
+    if (fixed) {
+        const opt = document.createElement('option');
+        opt.value = fixed.key;
+        opt.textContent = fixed.label;
+        select.appendChild(opt);
+        select.value = fixed.key;
+        select.disabled = true;
+        return;
+    }
+
     select.innerHTML = '<option value="">— none —</option>';
 
     let categories;
